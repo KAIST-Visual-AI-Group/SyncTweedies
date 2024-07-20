@@ -70,8 +70,7 @@ For 3D mesh texturing, we used generated 3D meshes from Luma AI.
 * Texture editing - `lantern/*` (Luma AI)
 
 ### 3D Gaussians Texturing
-Download [Synthetic NeRF dataset](https://www.matthewtancik.com/nerf) and reconstruct 3D Gaussians using [gsplat](https://github.com/nerfstudio-project/gsplat). 
-You can also use outdoor scenes such as [Mip-NeRF360 dataset](https://jonbarron.info/mipnerf360/). 
+Download [Synthetic NeRF dataset](https://www.matthewtancik.com/nerf) and reconstruct 3D scenes using either [3D Gaussian Splatting framework](https://github.com/graphdeco-inria/gaussian-splatting) or [gsplat](https://github.com/nerfstudio-project/gsplat). 
 
 <br />
 
@@ -341,6 +340,10 @@ Please run the commands below to run each application.
 
   **--zt_init** <br /><br />
   Initialize the initial random noise by projecting from the canonical space. 
+
+  **--no-antialiased** <br /><br />
+  Used for 3D scenes trained with 3D Gaussian Splatting framework. Do not provide this option when using 3D scenes reconstructed with gsplat.
+  
   
   
 </details>
