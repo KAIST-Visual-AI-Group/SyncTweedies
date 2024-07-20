@@ -132,6 +132,12 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# DSStore
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
 # Environments
 .env
 .venv
