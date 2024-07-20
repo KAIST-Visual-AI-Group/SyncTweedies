@@ -240,7 +240,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app panorama --tag panorama --save_top_dir ./output --save_dir_now --prompt "An old looking library" --depth_data_path ./data/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet
+  python main.py --app panorama --tag panorama --save_top_dir ./output --save_dir_now --prompt "An old looking library" --depth_data_path ./data/panorama/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet
   ```
 
   **--prompts** <br /><br />
