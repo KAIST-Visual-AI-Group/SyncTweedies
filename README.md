@@ -84,15 +84,15 @@ Please run the commands below to run each application.
   
   **1-to-1 Projection**
   
-  `python main.py --app ambiguous_image --case_num 2`
+  `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now`
   
   **1-to-n Projection**
     
- `python main.py --app ambiguous_image --case_num 2 --views_names identity inner_rotate`
+ `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --views_names identity inner_rotate`
 
   **n-to-1 Projection**
  
-  `python main.py --app ambiguous_image --case_num 2 --optimize_inverse_mapping`
+  `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --optimize_inverse_mapping`
 
   **--prompts** <br /><br />
   Text prompts to guide the generation process. (Provide a prompt per view)
@@ -132,7 +132,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app wide_image --prompt "A photo of a mountain range at twilight" --save_top_dir ./output --case_num 2 --seed 0 --sampling_method ddim --num_inference_steps 50 --panorama_height 512 --panorama_width    3072 --mvd_end 1.0 --initialize_xt_from_zt
+  python main.py --app wide_image --prompt "A photo of a mountain range at twilight" --save_top_dir ./output --save_dir_now --tag wide_image --case_num 2 --seed 0 --sampling_method ddim --num_inference_steps 50 --panorama_height 512 --panorama_width 3072 --mvd_end 1.0 --initialize_xt_from_zt 
   ```
 
   **--prompts** <br /><br />
@@ -179,7 +179,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app mesh --prompt "A hand carved wood turtle" --output ./output --prefix mesh_tex --case_num 2 --mesh ./data/mesh/turtle.obj --seed 0 --sampling_method ddim --initialize_xt_from_zt
+  python main.py --app mesh --prompt "A hand carved wood turtle" --save_top_dir ./output --tag mesh  --save_dir_now --case_num 2 --mesh ./data/mesh/turtle.obj --seed 0 --sampling_method ddim --initialize_xt_from_zt
   ```
 
   **--prompts** <br /><br />
@@ -215,7 +215,7 @@ Please run the commands below to run each application.
   ### 3D Mesh Texture Editing 
 
   ```
-  python main.py --app mesh --prompt "lantern" --output ./output --prefix mesh_edit --case_num 2 --mesh ./data/mesh/sdedit/mesh.obj --seed 0 --sampling_method ddim --initialize_xt_from_zt --sdedit --sdedit_prompt "A Chinese style lantern" --sdedit_timestep 0.2
+  python main.py --app mesh --prompt "lantern" --save_top_dir ./output --tag mesh  --save_dir_now --case_num 2 --mesh ./data/mesh/sdedit/mesh.obj --seed 0 --sampling_method ddim --initialize_xt_from_zt --sdedit --sdedit_prompt "A Chinese style lantern" --sdedit_timestep 0.2
   ```
 
   **--sdedit** <br /><br />
@@ -236,7 +236,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app panorama --tag panorama --prompt "An old looking library" --depth_data_path ./data/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet --save_top_dir ./output
+  python main.py --app panorama --tag panorama --save_top_dir ./output --save_dir_now --prompt "An old looking library" --depth_data_path ./data/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet
   ```
 
   **--prompts** <br /><br />
@@ -311,7 +311,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app gs --output ./output --prompt "A pink chair" --source_path ${DATA_PATH} --model_path ${3DGS_PATH} --dataset_type blender --case_num 2 --guidance_scale 35
+  python main.py --app gs --tag gs --save_dir_now --save_top_dir ./output --prompt "A photo of majestic red throne, adorned with gold accents" --source_path ./data/gaussians/chair --plyfile ./data/gaussians/chair.ply --dataset_type blender --case_num 2 --zt_init --force_clean_composition 
   ```
 
   **--prompts** <br /><br />
