@@ -582,8 +582,6 @@ class GaussianSplattingModel(BaseModel):
     @torch.no_grad()
     def __call__(self):
         if os.path.exists(os.path.join(self.gaussian_dir, "final_model.ply")):
-            # print_error("Gaussian model already exists!")
-            # return
             print("Gaussian model already exists! Overwriting...")
 
         num_timesteps = self.model.scheduler.config.num_train_timesteps
@@ -604,12 +602,29 @@ class GaussianSplattingModel(BaseModel):
             else self.model.controlnet
         )
 
-        # 2. Define call parameters
+        # 1. Prepare some variables
         device = self.model._execution_device
         guidance_scale = self.config.guidance_scale
 
-        # 3. Encode input prompt
+        num_inference_steps = self.config.steps
+        self.model.scheduler.set_timesteps(self.config.steps, device=device)
+        timesteps = self.model.scheduler.timesteps
+        
+        num_warmup_steps = (
+            len(timesteps) - num_inference_steps * self.model.scheduler.order
+        )
+        intermediate_results = []
 
+        main_views = []
+        exp = 0
+        alphas = self.model.scheduler.alphas_cumprod ** (0.5)
+        sigmas = (1 - self.model.scheduler.alphas_cumprod) ** (0.5)
+
+        # 2. Prepare extra step kwargs.
+        eta = 0.0
+        extra_step_kwargs = self.model.prepare_extra_step_kwargs(self.generator, eta)
+
+        # 3. Encode input prompt
         prompt_embeds = self.model._encode_prompt(
             prompt,
             device,
@@ -617,19 +632,16 @@ class GaussianSplattingModel(BaseModel):
             True,
             negative_prompt=negative_prompt,
         )
-
         neg_embeds, pos_embeds = torch.chunk(prompt_embeds, 2)
+        positive_prompt_embeds = torch.cat(
+            [pos_embeds] * len(self.latent_camera_poses), axis=0
+        )
 
-        # 5. Prepare timesteps
-        num_inference_steps = self.config.steps
-        self.model.scheduler.set_timesteps(self.config.steps, device=device)
-        timesteps = self.model.scheduler.timesteps
+        negative_prompt_embeds = torch.cat(
+            [neg_embeds] * len(self.latent_camera_poses), axis=0
+        )
 
-        # 7. Prepare extra step kwargs. TODO: Logic should ideally just be moved out of the pipeline
-        eta = 0.0
-        extra_step_kwargs = self.model.prepare_extra_step_kwargs(self.generator, eta)
-
-        # 7.1 Create tensor stating which controlnets to keep
+        # 4. Create tensor stating which controlnets to keep
         controlnet_keep = []
         for i in range(len(timesteps)):
             keeps = [
@@ -640,7 +652,7 @@ class GaussianSplattingModel(BaseModel):
                 keeps[0] if isinstance(controlnet, ControlNetModel) else keeps
             )
 
-        # 6. Prepare latent variables
+        # 5. Prepare latent variables
         case_name = METHOD_MAP[str(self.config.case_num)]
         is_denoizing_zt = (
             case_name in CANONICAL_DENOISING_ZT or case_name in JOINT_DENOISING_ZT
@@ -658,24 +670,6 @@ class GaussianSplattingModel(BaseModel):
                 save_type="video",
                 fps=10,
             )
-
-        num_warmup_steps = (
-            len(timesteps) - num_inference_steps * self.model.scheduler.order
-        )
-        intermediate_results = []
-
-        main_views = []
-        exp = 0
-        alphas = self.model.scheduler.alphas_cumprod ** (0.5)
-        sigmas = (1 - self.model.scheduler.alphas_cumprod) ** (0.5)
-
-        positive_prompt_embeds = torch.cat(
-            [pos_embeds] * len(self.latent_camera_poses), axis=0
-        )
-
-        negative_prompt_embeds = torch.cat(
-            [neg_embeds] * len(self.latent_camera_poses), axis=0
-        )
 
         func_params = {
             "guidance_scale": guidance_scale,
@@ -699,6 +693,7 @@ class GaussianSplattingModel(BaseModel):
             "instance_type": "latent",
         }
 
+        # 6. Run the main loop
         with self.model.progress_bar(total=len(timesteps)) as progress_bar:
             for i, t in enumerate(timesteps):
                 func_params["cur_index"] = i
@@ -724,13 +719,11 @@ class GaussianSplattingModel(BaseModel):
                     else:
                         latents = res_dict["x_t_1"]
 
-                    # if "x_t_1" in res_dict and res_dict["x_t_1"] is not None:
                     if res_dict.get("x_t_1") is not None:
                         x_t_1 = res_dict["x_t_1"]
                     else:
                         x_t_1 = self.forward_mapping(res_dict["z_t_1"], **func_params)
 
-                    # if "x0s" in res_dict and res_dict["x0s"] is not None:
                     if res_dict.get("x0s") is not None:
                         x_0 = res_dict["x0s"]
                     else:
@@ -754,7 +747,7 @@ class GaussianSplattingModel(BaseModel):
                     )
 
                 # Update pipeline settings after one step:
-                # 1. Annealing ControlNet scale
+                # Annealing ControlNet scale
                 if (1 - t / num_timesteps) < control_guidance_start[0]:
                     controlnet_conditioning_scale = (
                         initial_controlnet_conditioning_scale
@@ -816,7 +809,7 @@ class GaussianSplattingModel(BaseModel):
             latents.dim() == 4 and latents.shape[1] == 3
         ), f"Expected 3 channels with shape (B, 3, 512, 512), got {latents.shape}"
 
-        backgrounds = self.BACKGROUND.view(1, 3)
+        # 7. Final averaging
         z0s = self.inverse_mapping(
             latents,
             instance_type="rgb",
@@ -826,6 +819,7 @@ class GaussianSplattingModel(BaseModel):
         )
         self.gaussians.features = z0s
 
+        # 8. Save final results
         train_dir = os.path.join(
             self.logging_config["output_dir"], "train_view_results"
         )
@@ -849,6 +843,7 @@ class GaussianSplattingModel(BaseModel):
         os.makedirs(instance_dir, exist_ok=True)
         os.makedirs(eval_dir, exist_ok=True)
 
+        backgrounds = self.BACKGROUND.view(1, 3)
         override_color = F.sigmoid(z0s)
         rendering = render(
             self.gaussians,
