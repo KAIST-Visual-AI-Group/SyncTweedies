@@ -1,4 +1,3 @@
-# import configargparse
 import argparse 
 
 def load_panorama_config():
