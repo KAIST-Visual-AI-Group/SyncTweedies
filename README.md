@@ -40,7 +40,6 @@ pip install -e .
 <summary>3D Mesh Texturing (PyTorch3D) </summary>
 
 ```
-conda install pytorch3d -c pytorch3d
 pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py38_cu117_pyt200/download.html
 ```
 
