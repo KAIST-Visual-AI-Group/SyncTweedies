@@ -50,8 +50,7 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
 
   ```
   cd synctweedies/renderer/gaussian/gsplat
-  python setup.py install
-  pip install .
+  pip install -e .
   ```
 
 </details>
