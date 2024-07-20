@@ -62,15 +62,22 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
 
 ## Data
 ### 3D Mesh Texturing
-We used 3D mesh and prompt pairs from [Text2Tex](https://arxiv.org/abs/2303.11396) and [TEXTure](https://arxiv.org/abs/2302.01721). 
+Use 3D mesh and prompt pairs from [Text2Tex](https://arxiv.org/abs/2303.11396) and [TEXTure](https://arxiv.org/abs/2302.01721). 
 Text2Tex uses a subset of [Objaverse dataset](https://github.com/daveredrum/Text2Tex/blob/main/data/objaverse_subset.txt).
+* 3D mesh texturing - `data/mesh/turtle.obj` (TEXTure), `data/meshclutch_bag.obj` (Text2Tex)
 
-For 3D mesh texturing, we used generated 3D meshes from Luma AI. 
-* Texture generation - `turtle.obj` (TEXTure), `clutch_bag.obj` (Text2Tex)
-* Texture editing - `lantern/*` (Luma AI)
+For 3D mesh texture editing, use the generated 3D mesh from Luma AI. 
+* 3D mesh texture editing (SDEdit) - `data/mesh/sdedit/mesh.obj` (Luma AI)
+
+### 360&deg; Panorama Generation
+Use depth maps from [360MonoDepth](https://manurare.github.io/360monodepth/) to generate 360&deg; panoamra images.
+* 360&deg; panoamra generation - `data/panorama`
 
 ### 3D Gaussians Texturing
 Download [Synthetic NeRF dataset](https://www.matthewtancik.com/nerf) and reconstruct 3D scenes using either [3D Gaussian Splatting framework](https://github.com/graphdeco-inria/gaussian-splatting) or [gsplat](https://github.com/nerfstudio-project/gsplat). 
+
+Use the reconstructed 3D scene for texturing 3D Gaussians.
+* 3D Gaussians texturing - `data/gaussians/chair` and `data/gaussians/chair.ply`.
 
 <br />
 
