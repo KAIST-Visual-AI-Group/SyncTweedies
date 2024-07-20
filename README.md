@@ -40,7 +40,6 @@ pip install -e .
 <summary>3D Mesh Texturing (PyTorch3D) </summary>
 
 ```
-conda install pytorch3d -c pytorch3d
 pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py38_cu117_pyt200/download.html
 ```
 
@@ -50,7 +49,6 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
   <summary>3D Gaussians Texturing (Differentiable 3D Gaussian Rasterizer - gsplat) </summary>
 
   ```
-  pip install synctweedies/renderer/gaussian_splatting/submodules/simple-knn
   cd synctweedies/renderer/gaussian/gsplat
   python setup.py install
   pip install .
@@ -63,7 +61,7 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
 ## Data
 ### 3D Mesh Texturing
 Use 3D mesh and prompt pairs from [Text2Tex](https://arxiv.org/abs/2303.11396) and [TEXTure](https://arxiv.org/abs/2302.01721). 
-Text2Tex uses a subset of [Objaverse dataset](https://github.com/daveredrum/Text2Tex/blob/main/data/objaverse_subset.txt).
+Text2Tex uses a subset of [Objaverse dataset](https://objaverse.allenai.org/).
 * 3D mesh texturing - `data/mesh/turtle.obj` (TEXTure), `data/meshclutch_bag.obj` (Text2Tex)
 
 For 3D mesh texture editing, use the generated 3D mesh from Luma AI. 
@@ -243,7 +241,7 @@ Please run the commands below to run each application.
   <br />
 
   ```
-  python main.py --app panorama --tag panorama --save_top_dir ./output --save_dir_now --prompt "An old looking library" --depth_data_path ./data/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet
+  python main.py --app panorama --tag panorama --save_top_dir ./output --save_dir_now --prompt "An old looking library" --depth_data_path ./data/panorama/cf726b6c0144425282245b34fc4efdca_depth.dpt --case_num 2 --average_rgb --initialize_xt_from_zt --model controlnet
   ```
 
   **--prompts** <br /><br />
@@ -370,4 +368,4 @@ Please run the commands below to run each application.
 <br />
 
 ## Acknowledgement 
-This repository is based on [Visual Anagrams](https://github.com/dangeng/visual_anagrams), [SyncMVD](https://github.com/LIU-Yuxin/SyncMVD), and [gsplat]([https://github.com/JonathonLuiten/diff-gaussian-rasterization-w-depth](https://github.com/nerfstudio-project/gsplat)). We thank the authors for publicly releasing their codes.
+This repository is based on [Visual Anagrams](https://github.com/dangeng/visual_anagrams), [SyncMVD](https://github.com/LIU-Yuxin/SyncMVD), and [gsplat](https://github.com/nerfstudio-project/gsplat). We thank the authors for publicly releasing their codes.
