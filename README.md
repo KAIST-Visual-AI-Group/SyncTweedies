@@ -84,15 +84,15 @@ Please run the commands below to run each application.
   
   **1-to-1 Projection**
   
-  `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now`
+  ```python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now```
   
   **1-to-n Projection**
     
- `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --views_names identity inner_rotate`
+ ```python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --views_names identity inner_rotate```
 
   **n-to-1 Projection**
  
-  `python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --optimize_inverse_mapping`
+  ```python main.py --app ambiguous_image --case_num 2 --tag ambiguous_image --save_dir_now --optimize_inverse_mapping```
 
   **--prompts** <br /><br />
   Text prompts to guide the generation process. (Provide a prompt per view)
