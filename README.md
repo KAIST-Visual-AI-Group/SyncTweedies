@@ -30,7 +30,7 @@ compared to the previous state-of-the-art for each application.
 - PyTorch 2.0.0 
 
 ```
-git clone https://github.com/jh27kim/SyncTweedies_Panorama.git
+git clone https://github.com/KAIST-Visual-AI-Group/SyncTweedies
 conda env create -f environment.yml
 pip install git+https://github.com/openai/CLIP.git
 pip install -e .
