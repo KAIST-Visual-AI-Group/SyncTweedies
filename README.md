@@ -49,7 +49,6 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
   <summary>3D Gaussians Texturing (Differentiable 3D Gaussian Rasterizer - gsplat) </summary>
 
   ```
-  pip install synctweedies/renderer/gaussian_splatting/submodules/simple-knn
   cd synctweedies/renderer/gaussian/gsplat
   python setup.py install
   pip install .
