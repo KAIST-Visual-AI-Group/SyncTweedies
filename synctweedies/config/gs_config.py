@@ -39,8 +39,9 @@ def load_gs_config():
     parser.add_argument("--plyfile", type=str, default=None)
     parser.add_argument('--source_path', type=str, default=None, required=False, help="source_path must be provided for colmap and blender dataset")
     parser.add_argument("--up_vec", type=str, default="z", choices=["z", "y"])
-    parser.add_argument("--antialiased", action="store_true", default=True)
-
+    parser.add_argument('--antialiased', action='store_true')
+    parser.add_argument('--no-antialiased', dest='antialiased', action='store_false')
+    parser.set_defaults(antialiased=True)
     parser.add_argument("--zt_init", action="store_true", default=False)
     parser.add_argument("--background_color", type=str, default="white", choices=["white", "black"])
     parser.add_argument("--color_assign_method", type=str, default="previous", choices=["zero", "previous", "instance"])
