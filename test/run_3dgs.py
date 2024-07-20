@@ -11,8 +11,7 @@ command = f'python main.py \
     --dataset_type blender \
     --case_num 2 \
     --zt_init \
-    --force_clean_composition \
-    --no-antialiased'
+    --force_clean_composition'
     
 subprocess.call(command, shell=True)
 print("Done")

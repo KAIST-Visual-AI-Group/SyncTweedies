@@ -4,7 +4,7 @@ command = f'python main.py \
     --app wide_image \
     --prompt "A photo of a mountain range at twilight" \
     --save_top_dir ./output \
-    --case_num 3 \
+    --case_num 2 \
     --seed 0 \
     --sampling_method ddim \
     --num_inference_steps 50 \
