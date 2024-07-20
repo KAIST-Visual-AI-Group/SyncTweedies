@@ -2,6 +2,7 @@ import argparse
 
 def load_ambiguious_image_config():
     parser = argparse.ArgumentParser()
+    
     parser.add_argument("--app", type=str, default="ambiguous_image")
     parser.add_argument("--sampling_method", type=str, default="ddim")
     parser.add_argument("--prompts", nargs="*", default=["a horse", "a snowy mountain village"])

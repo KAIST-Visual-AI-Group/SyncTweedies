@@ -1,10 +1,7 @@
-import configargparse
+import argparse
 
 def load_gs_config():
-    parser = configargparse.ArgumentParser(
-                        prog='Multi-View Diffusion',
-                        description='Generate textured gaussians given the original 3dgs object and the text prompt.',
-                        epilog='Refer to https://arxiv.org/abs/2311.12891 for more details')
+    parser = argparse.ArgumentParser()
     
     parser.add_argument("--app", type=str, default="gs")
     

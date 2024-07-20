@@ -2,10 +2,7 @@
 import argparse 
 
 def load_panorama_config():
-    parser = argparse.ArgumentParser(
-                        prog='Multi-View Diffusion',
-                        description='Generate texture given mesh and texture prompt',
-                        epilog='Refer to https://arxiv.org/abs/2311.12891 for more details')
+    parser = argparse.ArgumentParser()
     
     parser.add_argument("--app", type=str, default="panorama")
     
