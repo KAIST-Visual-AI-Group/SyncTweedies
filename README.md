@@ -370,4 +370,4 @@ Please run the commands below to run each application.
 <br />
 
 ## Acknowledgement 
-This repository is based on [Visual Anagrams](https://github.com/dangeng/visual_anagrams), [SyncMVD](https://github.com/LIU-Yuxin/SyncMVD), and [gsplat]([https://github.com/JonathonLuiten/diff-gaussian-rasterization-w-depth](https://github.com/nerfstudio-project/gsplat)). We thank the authors for publicly releasing their codes.
+This repository is based on [Visual Anagrams](https://github.com/dangeng/visual_anagrams), [SyncMVD](https://github.com/LIU-Yuxin/SyncMVD), and [gsplat](https://github.com/nerfstudio-project/gsplat). We thank the authors for publicly releasing their codes.
