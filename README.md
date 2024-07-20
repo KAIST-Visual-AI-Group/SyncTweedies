@@ -60,7 +60,7 @@ pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.co
 ## Data
 ### 3D Mesh Texturing
 Use 3D mesh and prompt pairs from [Text2Tex](https://arxiv.org/abs/2303.11396) and [TEXTure](https://arxiv.org/abs/2302.01721). 
-Text2Tex uses a subset of [Objaverse dataset](https://github.com/daveredrum/Text2Tex/blob/main/data/objaverse_subset.txt).
+Text2Tex uses a subset of [Objaverse dataset](https://objaverse.allenai.org/).
 * 3D mesh texturing - `data/mesh/turtle.obj` (TEXTure), `data/meshclutch_bag.obj` (Text2Tex)
 
 For 3D mesh texture editing, use the generated 3D mesh from Luma AI. 
