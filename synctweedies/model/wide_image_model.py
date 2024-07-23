@@ -129,10 +129,9 @@ class WideImageModel(BaseModel):
     def init_prompt_embeddings(
         self, prompt: Optional[str] = None, negative_prompt: Optional[str] = None
     ):
-        if prompt is None:
-            prompt = self.config.prompt
         if negative_prompt is None:
             negative_prompt = self.config.negative_prompt
+            
         self.config.prompt = prompt
         self.config.negative_prompt = negative_prompt
         self.prompt_embeds = self.compute_prompt_embeds(prompt, negative_prompt)
@@ -186,6 +185,7 @@ class WideImageModel(BaseModel):
 
     @torch.no_grad()
     def __call__(self):
+        self.config.prompt = f"Best quality, extremely detailed {self.config.prompt}"
         self.init_prompt_embeddings(self.config.prompt, self.config.negative_prompt)
 
         generator = torch.Generator(device=self.device).manual_seed(self.config.seed)

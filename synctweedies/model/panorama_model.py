@@ -298,13 +298,13 @@ class PanoramaModel(BaseModel):
         Process reverse diffusion steps
         """
 
-        if prompt is None:
-            prompt = self.config.prompt
         if negative_prompt is None:
             negative_prompt = self.config.negative_prompt
+            self.config.negative_prompt = negative_prompt
 
+        prompt = f"Best quality, extremely detailed {self.config.prompt}"
         self.config.prompt = prompt
-        self.config.negative_prompt = negative_prompt
+        
 
         log_opt = vars(self.config)
         config_path = os.path.join(self.output_dir, "pano_run_config.yaml")

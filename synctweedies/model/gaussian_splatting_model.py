@@ -593,7 +593,7 @@ class GaussianSplattingModel(BaseModel):
         log_interval = self.config.log_interval
         ref_attention_end = self.config.ref_attention_end
         multiview_diffusion_end = self.config.mvd_end
-        prompt = self.config.prompt
+        prompt = f"Best quality, extremely detailed {self.config.prompt}"
         negative_prompt = self.config.negative_prompt
 
         controlnet = (

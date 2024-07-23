@@ -225,7 +225,7 @@ class MeshTextureModel(BaseModel):
         width = width or self.model.unet.config.sample_size * self.model.vae_scale_factor
 
         controlnet_conditioning_scale = self.config.conditioning_scale
-        prompt = self.config.prompt
+        prompt = f"Best quality, extremely detailed {self.config.prompt}"
         negative_prompt = self.config.negative_prompt
         callback_steps = 1
 
