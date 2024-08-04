@@ -179,7 +179,7 @@ Please run the commands below to run each application.
 </details>
 
 <details>
-  <summary>3D Mesh</summary>
+  <summary>3D Mesh Texturing</summary>
   
   <br />
 
