@@ -9,7 +9,7 @@
 <br />
 
 ## Introduction
-This repository contains the official implementation of SyncTweedies. SyncTweedies can be applied to various downstread applications including ambiguous image generation, wide image generation, 360&deg; panorama generation and texturing 3D mesh and Gaussians. More results can be found at our [project webpage](https://synctweedies.github.io/). 
+This repository contains the official implementation of SyncTweedies. SyncTweedies can be applied to various downstread applications including ambiguous image generation, arbitrary-sized image generation, 360&deg; panorama generation and texturing 3D mesh and Gaussians. More results can be found at our [project webpage](https://synctweedies.github.io/). 
 
 > We introduce a general diffusion synchronization framework for generating diverse visual content, including ambiguous images, panorama images, 3D mesh
 textures, and 3D Gaussian splats textures, using a pretrained image diffusion
@@ -132,7 +132,7 @@ Please run the commands below to run each application.
 </details>
 
 <details>
-  <summary>Wide Image</summary>
+  <summary>Arbitrary-sized Image</summary>
   
   <br />
 
